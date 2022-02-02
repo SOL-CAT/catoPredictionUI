@@ -1,0 +1,274 @@
+{
+  "version": "0.0.0",
+  "name": "mymoneydapp",
+  "instructions": [
+    {
+      "name": "create",
+      "accounts": [
+        {
+          "name": "bets",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userKey",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "placeBet",
+      "accounts": [
+        {
+          "name": "bets",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "serviceAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "commissionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "programAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fromAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "toAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fromAccountOwner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "side",
+          "type": "i32"
+        },
+        {
+          "name": "time",
+          "type": "string"
+        },
+        {
+          "name": "feeInCato",
+          "type": "i32"
+        },
+        {
+          "name": "catoFees",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "settleResult",
+      "accounts": [
+        {
+          "name": "bets",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "results",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "serviceAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "programAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "result",
+          "type": "i32"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "feedResult",
+      "accounts": [
+        {
+          "name": "results",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "result",
+          "type": "i32"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "index",
+          "type": "u16"
+        },
+        {
+          "name": "odds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "createResult",
+      "accounts": [
+        {
+          "name": "results",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Bets",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "vec": "u64"
+            }
+          },
+          {
+            "name": "time",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "side",
+            "type": {
+              "vec": "i32"
+            }
+          },
+          {
+            "name": "userKey",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Results",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "side",
+            "type": {
+              "vec": "i32"
+            }
+          },
+          {
+            "name": "odds",
+            "type": {
+              "vec": "i64"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "8cGzb93bVYXWo33RCPQYBUjdZJftj3RHhm5xWhmKHZ18"
+  }
+}

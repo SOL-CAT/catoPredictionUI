@@ -1,38 +1,299 @@
-.App {
+
+
+body {
+  position: absolute;
+  top: 0px; /* Header Height */
+  bottom: 0px; /* Footer Height */
+  width: 100%;
+  height: 100%
+}
+
+.content-body {
+  display: table-cell;
+}
+
+.ui.segment.pushable {
+  overflow-x: inherit;
+}
+
+.pusher {
+  background: linear-gradient(179.79deg, #201F24 0.19%, #080513 99.81%) !important;
+}
+
+.sidebar.menu{
+  width: 20vw;
+  max-width: 150px;
+  background: linear-gradient(180deg, #262626 0%, #050211 100%) !important;
+}
+.paddingLeft3 {
+  padding-left: 3% !important;
+}
+
+.paddingRight3 {
+  padding-right: 3% !important
+}
+
+.paddingRight6 {
+  padding-right: 6% !important
+}
+
+
+.height100px{
+  height: 100px;
+}
+
+.height50percent{
+  height: 50% !important;
+}
+
+.height100px > div.column{
+  height: 100% !important;
+}
+
+.wallet-adapter-button.height50percent, .wallet-adapter-button-trigger {
+  width: 150px !important;
+}
+
+
+.a.item:hover{
+  background-color: none;
+}
+
+div.MainContentBox{
+  color: white;
+  margin-left: 3% !important;
+  width: 85%;
+  margin-top: 50px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(126, 124, 128, 0.156) 0%, rgba(54, 54, 54, 0.65) 100%);
+  margin-top: 50px !important;
+  border-radius: 20px;
+}
+
+#MainContentBoxID{
+  opacity: 0.8;
+  border-radius: 23px;
+  min-height: 800px;
+  position: relative;
+}
+
+.PaginationBar{
+  position: absolute;
+  bottom: 20px;
+  left: 35%;
+}
+
+.SmallScreenPaginationBar{
+  position: absolute;
+  bottom: 20px;
+}
+
+.ui.secondary.inverted.menu.sidebar .active.item {
+  color: red !important;
+  background: none !important;
+}
+
+.ui.secondary.inverted.menu.sidebar .active.item:hover {
+  color: red !important;
+  background: none !important;
+}
+
+/*.ui.secondary.inverted.menu.tabClass .active.item {
+  color: white !important;
+  
+  background: linear-gradient(179.79deg, #201F24 0.19%, #080513 99.81%);
+  border-radius: 20px;
+}*/
+
+.ui.secondary.inverted.menu.tabClass .active.item {
+  color: black !important;
+  background: white;
+  border-radius: 20px;
+}
+
+.ui.secondary.inverted.menu.tabClass .active.item:hover {
+  color: black !important;
+  opacity: 1;
+}
+
+/*.ui.secondary.inverted.menu.tabClass .item:hover:not(.active) {
+  color: white !important;
+  background: linear-gradient(179.79deg, #201F24 0.19%, #080513 99.81%);
+  border: 1px solid white !important;
+  border-radius: 20px;
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}*/
+
+.ui.secondary.inverted.menu.tabClass a.item {
+  border: 1px solid white !important;
+  border-radius: 20px !important;
+  font-weight: 700;
+}
+
+.sidebar.menu a.item{
+  font-weight: 900 !important;
+  font-size: 18px !important;
+}
+
+.ui.secondary.inverted.menu.sidebar .link.item, .ui.secondary.inverted.menu.sidebar a.item:hover{
+  background: none !important;
+}
+
+.selectedMenuRedDot{
+  display: inline-block;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-bottom: 2px;
+      border-radius: 50%;
+      border-style: solid;
+      height: 9px;
+      width: 9px;
+      background-color: red;
+}
+
+.smallerFont{
+  font-size: 0.7rem !important;
+  margin-bottom: 10px !important;
+}
+
+.tabIcons{
+  padding-right: 10px;
+}
+
+.betCard{
+  border-radius: 15px !important;
+  background-color: #121212 !important ;
+  box-shadow: none !important;
+  width: 250px !important;
+  margin-right: 20px !important;
+  margin-left: 20px !important;
+}
+
+.betCard .extra.content{
   text-align: center;
+  color: white !important;
+  padding-top: 15px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.betCard .meta{
+  font-size: 0.75rem !important;
+  font-weight: 300;
+  color: #DEDCDC !important;
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 0.5px solid #DEDCDC;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.betCard .header{
+  font-size: 1.3rem !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.answersButtons button{
+  height: 30px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.answersButtons button:disabled{
+  color: white !important;
+  opacity: 0.5 !important;
+}
+
+.greenButton{
+  background-color: #41AB30 !important;
+}
+
+.redButton{
+  background-color: #AB3030 !important;
+}
+
+.solSelectBar{
+  height: 50px;
+}
+
+.betNowButtons{
+  height: 100px;
+  padding-top: 15% !important;
+}
+.betNowButtons button{
+  height: 30px;
+  width: 120px;
+  margin-left: 50px;
+  font-size: 12px;
+}
+
+.bar{
+  background-color: #41AB30 !important;
+}
+
+.ui.progress{
+  background-color: #AB3030 ;
+  width: 90% !important;
+  margin-left: 5% !important;
+}
+
+.solBalanceStat{
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  height: 30px;
+  padding-top: 5px !important;
+  width: 150px !important;
+}
+
+.solLabel{
+  padding-left: 10px;
+  height: 40px;
+  display:inline-block;
+}
+
+.solSelectBar button{
+  height: 30px;
+  width: 120px;
+  font-size: 12px;
+}
+
+.solBalanceStat .ui.input input{
+  background-color: #262626;
+  width: 70px;
+  color: white;
+  height: 40px;
+}
+.ui.input{
+  opacity: 1 !important;
+}
+.ui.input input::selection{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.ui.input input:disabled{
+  background-color: #262626;
+  color: white;
+  border: none;
+  opacity: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.placeBetModal{
+  width: 500px !important;
+}
+
+.infoMetric{
+  font-size: 18px;
+}
+
+.infoValue{
+  font-size: 22px;
+  font-weight: 700;
 }
