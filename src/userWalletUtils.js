@@ -12,11 +12,11 @@ const opts = {
 const web3 = require("@solana/web3.js");
 
 const { SystemProgram, Keypair } = anchor.web3;
-const service_account = Keypair.fromSecretKey(new Uint8Array([55,191,128,41,40,165,53,105,236,193,1,34,100,106,232,105,150,90,150,164,145,8,108,96,240,47,216,22,139,137,46,131,100,236,240,226,73,144,33,145,210,179,142,13,122,95,105,68,225,224,150,88,87,98,94,229,209,240,218,179,212,174,127,237]));
+const service_account = Keypair.fromSecretKey(decodeSecret("6QSjTzW7UzJtKtkpeCGIMmtf3kSO20g5obxwqJVNJg+fFaHBNkICZ33Rzt01YvYqrMMVROfjmBaX0V1BQO1Buw=="));
 const commission_account = new PublicKey("Gaw5HBXFe2W9uepHQ8ehGpHQ6eqEvAswdt9BHzPnet69");
 const commission_account_cato = new PublicKey("EafvraonBE9bgdg4iA1WKFTcVn2LWygTHRqndaDbE1kB")
 let api_url = window.location.href.includes("localhost") ? "https://catodex.com" : "https://catodex.com";
-let rpc_url = window.location.href.includes("localhost") ? "http://localhost:8899" : "https://ssc-dao.genesysgo.net"
+let rpc_url = window.location.href.includes("localhost") ? "https://ssc-dao.genesysgo.net" : "https://ssc-dao.genesysgo.net"
 export const getSolBalanceUser = async function (publicKey) {
     try {
         if (publicKey && publicKey.toBase58()) {
@@ -217,7 +217,7 @@ export const placeBets = async function (wallet, programID, betDetails) {
 
     let newUser = false;
     const provider = await getProvider(wallet);
-    const programId = new anchor.web3.PublicKey('FpvQo16fGpkMhVgryq84XQqDzX1LsE9JL9fdoDGBLVt5');
+    const programId = new anchor.web3.PublicKey('HLnx8q2Vpk9K7yJAWq3qvUz37kVur1UkaTBHj3Nb7gvB');
     const prog = new anchor.Program(idl, programId, provider);
     let existing_account = null;
     let steps = [];
