@@ -12,11 +12,11 @@ const opts = {
 const web3 = require("@solana/web3.js");
 
 const { SystemProgram, Keypair } = anchor.web3;
-const service_account = Keypair.fromSecretKey(decodeSecret("6QSjTzW7UzJtKtkpeCGIMmtf3kSO20g5obxwqJVNJg+fFaHBNkICZ33Rzt01YvYqrMMVROfjmBaX0V1BQO1Buw=="));
+const service_account = Keypair.fromSecretKey(decodeSecret("sAYBEhZP6rhhy/3hHI5xcovNExoa1O5maWHX/5rs55wuitB2fcxoxGICml+KrcsP4kUdD4PmX3w6mXNGBaCSXA=="));
 const commission_account = new PublicKey("Gaw5HBXFe2W9uepHQ8ehGpHQ6eqEvAswdt9BHzPnet69");
 const commission_account_cato = new PublicKey("EafvraonBE9bgdg4iA1WKFTcVn2LWygTHRqndaDbE1kB")
 let api_url = window.location.href.includes("localhost") ? "https://catodex.com" : "https://catodex.com";
-let rpc_url = window.location.href.includes("localhost") ? "https://ssc-dao.genesysgo.net" : "https://ssc-dao.genesysgo.net"
+let rpc_url = window.location.href.includes("localhost") ? "http://localhost:8899" : "https://ssc-dao.genesysgo.net"
 export const getSolBalanceUser = async function (publicKey) {
     try {
         if (publicKey && publicKey.toBase58()) {
@@ -217,10 +217,10 @@ export const placeBets = async function (wallet, programID, betDetails) {
 
     let newUser = false;
     const provider = await getProvider(wallet);
-    const programId = new anchor.web3.PublicKey('HLnx8q2Vpk9K7yJAWq3qvUz37kVur1UkaTBHj3Nb7gvB');
+    const programId = new anchor.web3.PublicKey('97m9yX1LtHkBe5FVq6x8ZC7n6zVgNSq9dTdcALetuwNd');
     const prog = new anchor.Program(idl, programId, provider);
     let existing_account = null;
-    let steps = [];
+    let bet_account = null;
     if (!account) {
         account = anchor.web3.Keypair.generate();
         secretKey = encodeSecret(account.secretKey);
@@ -231,6 +231,7 @@ export const placeBets = async function (wallet, programID, betDetails) {
             label: secretKey
         });
         newUser = true;
+        bet_account = account;
     }
     else {
         existing_account = anchor.web3.Keypair.fromSecretKey(decodeSecret(account));
@@ -239,49 +240,30 @@ export const placeBets = async function (wallet, programID, betDetails) {
             action: wallet.publicKey.toBase58(),
             label: account
         });
+        bet_account = existing_account;
     }
     try {
-        if (newUser) {
-            console.log(account.publicKey.toBase58());
-            await prog.rpc.create(wallet.publicKey.toBase58(), {
-                accounts: {
-                    bets: account.publicKey,
-                    user: wallet.publicKey,
-                    systemProgram: SystemProgram.programId
-                },
-                signers: [account]
-            });
-
-        }
-        const conn = new web3.Connection(rpc_url, "confirmed");
-        const transaction = new web3.Transaction().add(
-            web3.SystemProgram.transfer({
-                fromPubkey: wallet.publicKey,
-                toPubkey: newUser ? account.publicKey : existing_account.publicKey,
-                lamports: amount * 10 ** 9,
-            }),
-        );
-        transaction.feePayer = window.solana.publicKey;
-        transaction.recentBlockhash = (
-            await conn.getRecentBlockhash()
-        ).blockhash;
-        const { signature } = await window.solana.signAndSendTransaction(transaction);
-        await conn.confirmTransaction(signature);
-        console.log('SIGNATURE', signature);
-
         let from_account = catoAddress ? new PublicKey(catoAddress) : commission_account_cato;
-        await prog.rpc.placeBet(new anchor.BN(amount * 10 ** 9), id, new anchor.BN(side), time.toString().slice(0, 10), new anchor.BN(feeInCato ? 1 : 0), new anchor.BN(amountCatoFees), {
+        console.log(bet_account.publicKey.toBase58());
+        await prog.rpc.placeSingleBet(
+            bet_account.publicKey.toBase58(),
+            new anchor.BN(amount * 10 ** 9), 
+            id, 
+            new anchor.BN(side), 
+            time.toString().slice(0, 10), 
+            new anchor.BN(feeInCato ? 1 : 0), 
+            new anchor.BN(amountCatoFees), {
             accounts: {
-                bets: newUser ? account.publicKey : existing_account.publicKey,
+                bets: bet_account.publicKey,
                 user: wallet.publicKey,
-                programAccount: newUser ? account.publicKey : existing_account.publicKey,
+                systemProgram: SystemProgram.programId,
+                tokenProgram: TOKEN_PROGRAM_ID,
                 serviceAccount: service_account.publicKey,
                 commissionAccount: commission_account,
-                fromAccount: from_account,
-                toAccount: commission_account_cato,
-                fromAccountOwner: wallet.publicKey,
-                tokenProgram: TOKEN_PROGRAM_ID
-            }
+                fromAccountCato: from_account,
+                toAccountCato: commission_account_cato,
+            },
+            signers: [bet_account]
         });
 
         if (newUser) {
@@ -305,15 +287,14 @@ export const placeBets = async function (wallet, programID, betDetails) {
             id: id
         });
         return [{
-            "Prediction_Placed ": "Successfull"
+            "Prediction ": "Successful"
         }];
     }
 
     catch (e) {
         console.log(e);
         return [{
-            "Prediction": "Fail",
-            "Please contact CATO discord": "!"
+            "Prediction ": "Fail"
         }]
     }
 };

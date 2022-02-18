@@ -41,7 +41,7 @@ export default function IndividualCardComponent(props) {
         }
     }
         else{
-            if (solBalance - valueToSet > 0.079 && valueToSet >= 0.04){
+            if (solBalance - valueToSet > 0.005 && valueToSet >= 0.04){
                 setTextBoxValue(valueToSet);
                 setSliderValue(selectedSliderValue);
             }
@@ -77,7 +77,7 @@ export default function IndividualCardComponent(props) {
                 amount2 : (amount2 * odds2[side2 === 1 ? 2 : 1] / odds2[side2] + amount2).toFixed(2) 
     }
     async function placeBet(side) {
-        let stepsResponse = await placeBets(wallet, programID, {
+        let response = await placeBets(wallet, programID, {
             side: side,
             id: betId,
             time: +new Date(),
@@ -87,17 +87,9 @@ export default function IndividualCardComponent(props) {
             catoAddress:  catoStats.catoAddress,
             amountCatoFees: !checkBoxChecked ? 0 : getFeesFromAmount(textBoxValue)
         });
-        if (stepsResponse.length < 2)
+        if (response.length < 2)
             setButtonDisabled(true);
-        else {
-            stepsResponse = [{
-                "Status": "There was an error"
-            },
-            {
-                "If funds were debited": "Please contact support for refund"
-            }]
-        }
-        setBetPlaceResponse(stepsResponse);
+        setBetPlaceResponse(response);
     }
     function getFeesFromAmount(betAmount) {
         let catoFees = 0,
@@ -176,8 +168,8 @@ export default function IndividualCardComponent(props) {
         setTextBoxValue(solBalance);
         setSliderValue(100);
         }
-        else if (solBalance > 0.08){
-            let ta = Math.floor((solBalance - 0.08)*100)/100;
+        else if (solBalance > 0.005){
+            let ta = Math.floor((solBalance - 0.005)*100)/100;
             setTextBoxValue(ta)
             setSliderValue(100);
         }
@@ -190,6 +182,7 @@ export default function IndividualCardComponent(props) {
         let estimatedWinning = getEstimatedWinningAmount(amount, odds, side);
         return estimatedWinning;
     }
+    let currentUnixTime = + new Date();
     return <Card
         className="betCard"
     >
@@ -219,7 +212,7 @@ export default function IndividualCardComponent(props) {
                                 <Modal open={modalBox1Visible}
                                     className="placeBetModal"
                                     closeIcon
-                                    trigger={<Button className="greenButton" disabled={solBalance < 0.02 || !walletConnected || textBoxValue <= 0.02 || betType !== "Live" || hasUserPlacedBet || isButtonDisabled}>{responses[1]}</Button>}
+                                    trigger={<Button className="greenButton" disabled={time < currentUnixTime/1000 || solBalance < 0.02 || !walletConnected || textBoxValue <= 0.02 || betType !== "Live" || hasUserPlacedBet || isButtonDisabled}>{responses[1]}</Button>}
                                     onOpen={() => {
                                         setModalBox1Visible(true);
                                         setAmountFromFees();
@@ -236,7 +229,7 @@ export default function IndividualCardComponent(props) {
                                 <Modal open={modalBox2Visible}
                                     className="placeBetModal"
                                     closeIcon
-                                    trigger={<Button className="redButton" disabled={!walletConnected || textBoxValue <= 0.02 || betType !== "Live" || hasUserPlacedBet || isButtonDisabled}>{responses[2]}</Button>}
+                                    trigger={<Button className="redButton" disabled={time < currentUnixTime/1000 || !walletConnected || textBoxValue <= 0.02 || betType !== "Live" || hasUserPlacedBet || isButtonDisabled}>{responses[2]}</Button>}
                                     onOpen={() => {
                                         setModalBox2Visible(true);
                                         setAmountFromFees();

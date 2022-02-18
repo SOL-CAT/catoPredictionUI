@@ -30,7 +30,7 @@ const CardGroupComponent = React.memo(props => {
         tab = props.tab;
     return <Card.Group centered={verySmallScreen}>
         {navBarItems[betType] !== "Portfolio" ? allBets.map((item, index) => {
-            return item.type === navBarItems[betType] && item.category === tabItems[tab] ? <IndividualCardComponent
+            return item.type === navBarItems[betType] && (item.category === tabItems[tab] || tab === 0) ? <IndividualCardComponent
                 walletConnected={wallet.connected}
                 betPlaced={false}
                 betId={item.betId}
@@ -46,7 +46,7 @@ const CardGroupComponent = React.memo(props => {
                 betData={null}
                 volume={item.volume}
                 solBalance={userSolBalance}
-                hasUserPlacedBet={userBetIds.includes(item.betId)}
+                hasUserPlacedBet={userBetIds && userBetIds.includes(item.betId)}
                 catoStats={catoStats}
                 userAccountKey={userAccountKey}
             /> : null

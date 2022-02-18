@@ -3,6 +3,81 @@
   "name": "mymoneydapp",
   "instructions": [
     {
+      "name": "placeSingleBet",
+      "accounts": [
+        {
+          "name": "bets",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "fromAccountCato",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "toAccountCato",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "serviceAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "commissionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userKey",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "side",
+          "type": "i32"
+        },
+        {
+          "name": "time",
+          "type": "string"
+        },
+        {
+          "name": "feeInCato",
+          "type": "i32"
+        },
+        {
+          "name": "amountFeeCato",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "create",
       "accounts": [
         {
@@ -25,82 +100,6 @@
         {
           "name": "userKey",
           "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "placeBet",
-      "accounts": [
-        {
-          "name": "bets",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "serviceAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "commissionAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "programAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fromAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "toAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fromAccountOwner",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        },
-        {
-          "name": "id",
-          "type": "string"
-        },
-        {
-          "name": "side",
-          "type": "i32"
-        },
-        {
-          "name": "time",
-          "type": "string"
-        },
-        {
-          "name": "feeInCato",
-          "type": "i32"
-        },
-        {
-          "name": "catoFees",
-          "type": "u64"
         }
       ]
     },
@@ -131,6 +130,11 @@
           "name": "user",
           "isMut": true,
           "isSigner": true
+        },
+        {
+          "name": "toAccountOwner",
+          "isMut": true,
+          "isSigner": false
         },
         {
           "name": "systemProgram",
@@ -202,6 +206,37 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "safetyResult",
+      "accounts": [
+        {
+          "name": "fromAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "toAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -233,6 +268,10 @@
             "type": {
               "vec": "i32"
             }
+          },
+          {
+            "name": "initialised",
+            "type": "bool"
           },
           {
             "name": "userKey",
@@ -269,6 +308,6 @@
     }
   ],
   "metadata": {
-    "address": "HLnx8q2Vpk9K7yJAWq3qvUz37kVur1UkaTBHj3Nb7gvB"
+    "address": "97m9yX1LtHkBe5FVq6x8ZC7n6zVgNSq9dTdcALetuwNd"
   }
 }
