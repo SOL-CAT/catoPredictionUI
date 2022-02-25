@@ -12,7 +12,7 @@ const opts = {
 const web3 = require("@solana/web3.js");
 
 const { SystemProgram, Keypair } = anchor.web3;
-const service_account = Keypair.fromSecretKey(decodeSecret("sAYBEhZP6rhhy/3hHI5xcovNExoa1O5maWHX/5rs55wuitB2fcxoxGICml+KrcsP4kUdD4PmX3w6mXNGBaCSXA=="));
+const service_account = Keypair.fromSecretKey(decodeSecret("QZ2bFO/j0yYMjuZB+k+VCRyXHE1byOs0a26HkOvgnMCqS9q/YAIhuGKfqafB1AGzLXScrowRICq+lPeKbnNNpg=="));
 const commission_account = new PublicKey("Gaw5HBXFe2W9uepHQ8ehGpHQ6eqEvAswdt9BHzPnet69");
 const commission_account_cato = new PublicKey("EafvraonBE9bgdg4iA1WKFTcVn2LWygTHRqndaDbE1kB")
 let api_url = window.location.href.includes("localhost") ? "https://catodex.com" : "https://catodex.com";
@@ -217,7 +217,7 @@ export const placeBets = async function (wallet, programID, betDetails) {
 
     let newUser = false;
     const provider = await getProvider(wallet);
-    const programId = new anchor.web3.PublicKey('97m9yX1LtHkBe5FVq6x8ZC7n6zVgNSq9dTdcALetuwNd');
+    const programId = new anchor.web3.PublicKey('39yMiH8tkd4Ro4vLXv4saorGoTosrcXY9yoSJ5p3e1wn');
     const prog = new anchor.Program(idl, programId, provider);
     let existing_account = null;
     let bet_account = null;
